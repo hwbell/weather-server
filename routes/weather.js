@@ -54,7 +54,8 @@ router.get('/:lat/:long', function(req, res, next) {
       console.log(weatherInfo)
       
       // send it back
-      res.send(weatherInfo);
+      weatherInfo.mapBoxKey = process.env.MAPBOX_KEY;
+      res.send(Object.keys(weatherInfo));
     })
 
 });
