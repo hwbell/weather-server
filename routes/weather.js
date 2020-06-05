@@ -35,17 +35,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:lat/:long', function(req, res, next) {
-  console.log('GET @ /:lat/:long')
   var lat = req.params.lat;
   var long = req.params.long;
   console.log(lat, long)
+  console.log(`GET request for weather @ ${lat}. ${long}`)
 
   checkInput(lat, long, res);
-
-  const position = {
-    latitude: Number(lat), 
-    longitude: Number(long)
-  };
 
   // make the call to darksky
   fetch(`https://api.darksky.net/forecast/${process.env.APPID}/${lat},${long}`)
@@ -54,7 +49,6 @@ router.get('/:lat/:long', function(req, res, next) {
       console.log(weatherInfo)
       
       // send it back
-      weatherInfo.mapBoxKey = process.env.MAPBOX_KEY;
       res.send(weatherInfo);
     })
 
